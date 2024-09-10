@@ -1,7 +1,7 @@
 import boto3
 
 def lambda_handler(event, context):
-    ec2 = boto3.client('ec2', region_name='your-region')  # Replace 'your-region' with the correct region
+    ec2 = boto3.client('ec2', region_name='ap-south-1') 
     
     # Get list of all stopped instances
     instances = ec2.describe_instances(Filters=[{
@@ -28,7 +28,7 @@ def lambda_handler(event, context):
         import boto3
 
 def lambda_handler(event, context):
-    ec2 = boto3.client('ec2', region_name='your-region')  # Replace 'your-region' with the correct region
+    ec2 = boto3.client('ec2', region_name='ap-south-1') 
     
     # Get list of all running instances
     instances = ec2.describe_instances(Filters=[{
