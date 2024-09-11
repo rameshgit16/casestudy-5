@@ -17,12 +17,11 @@ def lambda_handler(event, context):
     else:
         print('No running instances found')
 
-    # Ensure the return statement is properly formatted
+    # Ensure the return statement is properly formatted and closed
     return {
         'statusCode': 200,
         'body': 'Instances stopped successfully'
     }
-
 
 
         import boto3
