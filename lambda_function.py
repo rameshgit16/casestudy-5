@@ -1,7 +1,7 @@
 import boto3
 
 def lambda_handler(event, context):
-    ec2 = boto3.client('ec2', ap-south-1')  # Replace 'your-region' with the correct AWS region
+    ec2 = boto3.client('ec2', region_name='ap-south-1')
     
     # Get list of all stopped instances
     instances = ec2.describe_instances(Filters=[{
@@ -19,7 +19,6 @@ def lambda_handler(event, context):
     else:
         print('No stopped instances found')
 
-    # Return a response after starting instances
     return {
         'statusCode': 200,
         'body': f'Instances started successfully: {instance_ids}' if instance_ids else 'No stopped instances found to start'
