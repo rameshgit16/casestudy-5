@@ -3,23 +3,24 @@ import boto3
 def lambda_handler(event, context):
     ec2 = boto3.client('ec2', region_name='ap-south-1')
     
-    # Get list of all stopped instances
+    # Get list of all running instances
     instances = ec2.describe_instances(Filters=[{
-        'Name': 'instance-state-name',
-        'Values': ['stopped']
+        'Name': 'instance-state-name', 
+        'Values': ['running']
     }])
     
     # Extract instance IDs
     instance_ids = [instance['InstanceId'] for reservation in instances['Reservations'] for instance in reservation['Instances']]
     
     if instance_ids:
-        # Start the instances
-        ec2.start_instances(InstanceIds=instance_ids)
-        print(f'Starting instances: {instance_ids}')
+        # Stop the instances
+        ec2.stop_instances(InstanceIds=instance_ids)
+        print(f'Stopping instances: {instance_ids}')
     else:
-        print('No stopped instances found')
-
+        print('No running instances found')
+    
+    # Properly formatted return statement
     return {
         'statusCode': 200,
-        'body': 'Instances started successfully'
+        'body': 'Instances stopped successfully'
     }
