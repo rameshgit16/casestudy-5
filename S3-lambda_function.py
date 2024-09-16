@@ -28,7 +28,7 @@ def lambda_handler(event, context):
         try:
             response = s3.get_object(Bucket=bucket_name, Key=file_key)
             file_content = response['Body'].read().decode('utf-8')
-            logger.info(f"File Content (first 100 chars): {file_content[:100]}")  # Log the first 100 characters for verification
+            logger.info(f"File Content (first 100 chars): {file_content[:100]}")  
         except botocore.exceptions.ClientError as e:
             if e.response['Error']['Code'] == 'NoSuchKey':
                 logger.error(f"File not found: {file_key}")
